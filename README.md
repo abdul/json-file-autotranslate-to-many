@@ -1,4 +1,7 @@
+![Node.js Package](https://github.com/abdul/json-file-autotranslate-to-many/workflows/Node.js%20Package/badge.svg)
+
 # json-file-autotranslate-to-many
+
 
 This tool allows you to translate a JSON file (en-us.json)
 into multiple languages (ar.json, de.json, etc.) using Google Translate, DeepL, Azure Translator, or

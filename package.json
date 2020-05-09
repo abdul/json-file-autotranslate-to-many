@@ -1,7 +1,7 @@
 {
   "name": "json-file-autotranslate-to-many",
   "description": "Translate a JSON file (en.json) containing translations into multiple languages (ar.json, de.json, etc.).",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
