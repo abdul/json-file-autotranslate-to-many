@@ -73,11 +73,14 @@ The Translated language file will be renamed to `<language_code>.json` is be
 placed inside `translations` directory. 
 
 This is how `translations` directory structure look like:
+```
 translations
+├── ar.json
 ├── de.json
 ├── en.json
 ├── fr.json
 └── it.json
+```
 
 ## File Structure
 
