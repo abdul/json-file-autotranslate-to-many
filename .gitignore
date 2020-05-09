@@ -66,4 +66,6 @@ typings/
 
 # dotenv environment variables file
 .env
-.env.test
+.env.testtranslations
+.idea
+translations/

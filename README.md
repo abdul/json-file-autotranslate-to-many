@@ -1,7 +1,7 @@
-# json-autotranslate
+# json-file-autotranslate-to-many
 
-This tool allows you to translate a locale folder containing multiple JSON files
-into multiple languages using Google Translate, DeepL, Azure Translator, or
+This tool allows you to translate a JSON file (en-us.json)
+into multiple languages (ar.json, de.json, etc.) using Google Translate, DeepL, Azure Translator, or
 manually. You can either use the translation keys (natural translation) or their
 values (key-based translation) as a source for translations.
 
@@ -16,62 +16,77 @@ so their structure doesn't get mangled by the translation.
 ## Installation
 
 ```shell
-$ yarn add json-autotranslate
+$ yarn add json-file-autotranslate-to-many
 # or
-$ npm i -S json-autotranslate
+$ npm i -S json-file-autotranslate-to-many
 ```
 
 ## Running json-autotranslate
 
 ```shell
-$ yarn json-autotranslate
+$ yarn json-file-autotranslate-to-many
 # or
-$ npx json-autotranslate
+$ npx json-file-autotranslate-to-many
 ```
 
 ### Usage Examples
 
-Translate natural language source files located in the `locales` directory using
+Translate natural language source file located at `translations/en-us.json` using
 Google Translate and delete existing keys in translated JSON files that are no
 longer used.
 
 ```shell
-$ yarn json-autotranslate -i locales -d -c service-account.json
+$ yarn json-file-autotranslate-to-many -i translations/en-us.json -g locales.txt -d -c service-account.json
 ```
 
-Manually translate key-based source files located in the `locales` directory.
+Manually translate key-based source files located in the `translations/en-us.json` 
+directory.
 
 ```shell
-$ yarn json-autotranslate -i locales -s manual
+$ yarn json-file-autotranslate-to-many -i translations/en-us.json -g locales.txt -s manual
 ```
 
-## Directory Structure
+Both of commands will translate the input file `translations/en-us.json` to all 
+other languages that exist in locales.txt, and the translated lanugage files are 
+renamed to `<language_code>.json` and copied to `translations` directory. 
 
-Your `locales` directory should look like this:
+## Locales Code File Structure
+
+Your `locales.txt` directory should look like this:
 
 ```
-locales
-├── de
-├── en
-│   ├── login.json
-│   └── register.json
-├── fr
-└── it
+locales.txt
+ar
+de
+en
+fr
+it
 ```
 
-If you don't specify another source language, this tool will translate all files
-located in the `en` into all other languages that exist as directories. A single
-language directory (e.g. `en`) should only contain JSON files. Sub-directories
-and other files will be ignored.
+By default, this tool will translate the input file from `en` to all 
+other languages that exist in locales.txt. The input file must exist 
+and should contain valid JSON.
+
+### Translated Files
+
+The Translated language file will be renamed to `<language_code>.json` is be 
+placed inside `translations` directory. 
+
+This is how `translations` directory structure look like:
+translations
+├── de.json
+├── en.json
+├── fr.json
+└── it.json
 
 ## File Structure
 
-There are two ways that json-autotranslate can interpret files:
+There are two ways that json-file-autotranslate-to-many can interpret files:
 
 - Natural Language (`natural`)
 - Key-Based (`key-based`)
 
-If you don't specify a file structure type, json-autotranslate will
+If you don't specify a file structure type, json-file-autotranslate-to-many will
 automatically determine the type on a per-file basis. In most cases, this is
 sufficient.
 
@@ -109,7 +124,7 @@ structure will be transfered over to the translated files as well.
 
 ## Available Services
 
-As of this release, json-autotranslate offers five services:
+As of this release, json-file-autotranslate-to-many offers five services:
 
 - **google-translate** (default, uses
   [Google Translate](https://translate.google.com) to translate strings)
@@ -123,7 +138,7 @@ As of this release, json-autotranslate offers five services:
   touching any files)
 
 You can select a service using the `-s` or `--service` option. If you specify
-the `--list-services` flag, json-autotranslate will output a list of all
+the `--list-services` flag, json-file-autotranslate-to-many will output a list of all
 available services.
 
 ### Google Translate
@@ -157,7 +172,7 @@ DeepL charges a fixed monthly price plus a variable fee for every 500 translated
 characters.
 
 After you have completed your sign-up, you can pass the API key to
-json-autotranslate using the `-c` or `--config` option.
+json-file-autotranslate-to-many using the `-c` or `--config` option.
 
 ### Azure Translator Text
 
@@ -180,7 +195,7 @@ translate the source strings manually in the console.
 
 Matchers are used to replace interpolations with placeholders before they are
 sent to the translation service. This ensures that interpolations don't get
-scrambled in the process. As of this release, json-autotranslate offers four
+scrambled in the process. As of this release, json-file-autotranslate-to-many offers four
 matchers for different styles of interpolation:
 
 - **icu** (default, matches [ICU MessageFormat](https://translate.google.com)
@@ -192,14 +207,15 @@ matchers for different styles of interpolation:
 - **none** (doesn't match any interpolations)
 
 You can select a matchers using the `-m` or `--matcher` option. If you specify
-the `--list-matchers` flag, json-autotranslate will output a list of all
+the `--list-matchers` flag, json-file-autotranslate-to-many will output a list of all
 available matchers.
 
 ## Available Options
 
 ```
 Options:
-  -i, --input <inputDir>               the directory containing language directories (default: ".")
+  -i, --input <inputFile>              the input containing source language to be translated
+  -g, --locales-file <localesFile>     the locales text file that contains target locale codes in different lines
   -l, --source-language <sourceLang>   specify the source language (default: "en")
   -t, --type <key-based|natural|auto>  specify the file structure type (default: "auto")
   -s, --service <service>              selects the service to be used for translation (default: "google-translate")

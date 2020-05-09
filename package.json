@@ -1,7 +1,7 @@
 {
-  "name": "json-autotranslate",
-  "description": "Translate a folder of JSON files containing translations into multiple languages.",
-  "version": "1.6.0",
+  "name": "json-file-autotranslate-to-many",
+  "description": "Translate a JSON file (en.json) containing translations into multiple languages (ar.json, de.json, etc.).",
+  "version": "1.7.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -14,6 +14,9 @@
     "name": "Leo Bernard",
     "url": "https://leolabs.org"
   },
+  "contributors": [
+    "Abdul Qabiz (https://abdulqabiz.com)"
+  ],
   "keywords": [
     "google-translate",
     "translate",
@@ -23,9 +26,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/leolabs/json-autotranslate.git"
+    "url": "https://github.com/abdul/json-autotranslate.git"
   },
-  "homepage": "https://github.com/leolabs/json-autotranslate",
+  "homepage": "https://github.com/abdul/json-autotranslate",
   "files": [
     "lib/*"
   ],

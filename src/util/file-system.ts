@@ -4,12 +4,9 @@ import * as flatten from 'flattenjs';
 
 export type FileType = 'key-based' | 'natural' | 'auto';
 
-export const getAvailableLanguages = (directory: string) =>
-  fs
-    .readdirSync(directory)
-    .map(d => path.resolve(directory, d))
-    .filter(d => fs.statSync(d).isDirectory())
-    .map(d => path.basename(d));
+export const getAvailableLanguages = (file: string) =>
+  String(fs
+    .readFileSync(file)).split('\n');
 
 export const detectFileType = (json: any): FileType => {
   const invalidKeys = Object.keys(json).filter(
@@ -19,6 +16,24 @@ export const detectFileType = (json: any): FileType => {
   return invalidKeys.length > 0 ? 'natural' : 'key-based';
 };
 
+export const loadTranslation = (
+  directory: string,
+  f: string,
+  fileType: FileType = 'auto',
+) => {
+  const json = require(path.resolve(directory, f));
+  const type = fileType === 'auto' ? detectFileType(json) : fileType;
+
+  return {
+    name: f,
+    originalContent: json,
+    type,
+    content:
+      type === 'key-based'
+        ? flatten.convert(require(path.resolve(directory, f)))
+        : require(path.resolve(directory, f)),
+  };
+}
 export const loadTranslations = (
   directory: string,
   fileType: FileType = 'auto',
@@ -27,19 +42,8 @@ export const loadTranslations = (
     .readdirSync(directory)
     .filter(f => f.endsWith('.json'))
     .map(f => {
-      const json = require(path.resolve(directory, f));
-      const type = fileType === 'auto' ? detectFileType(json) : fileType;
-
-      return {
-        name: f,
-        originalContent: json,
-        type,
-        content:
-          type === 'key-based'
-            ? flatten.convert(require(path.resolve(directory, f)))
-            : require(path.resolve(directory, f)),
-      };
-    });
+     return loadTranslation(directory, f, fileType)
+    })
 
 export const fixSourceInconsistencies = (
   directory: string,
