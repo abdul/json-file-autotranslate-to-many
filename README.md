@@ -1,4 +1,4 @@
-![Node.js Package](https://github.com/abdul/json-file-autotranslate-to-many/workflows/json-file-autotranslate-to-many/badge.svg)
+![Node.js Package](https://github.com/abdul/json-file-autotranslate-to-many/workflows/CI/badge.svg)
 
 # json-file-autotranslate-to-many
 
