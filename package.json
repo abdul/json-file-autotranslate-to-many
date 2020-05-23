@@ -26,9 +26,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/abdul/json-autotranslate.git"
+    "url": "https://github.com/abdul/json-file-autotranslate-to-many.git"
   },
-  "homepage": "https://github.com/abdul/json-autotranslate",
+  "homepage": "https://github.com/abdul/json-file-autotranslate-to-many",
   "files": [
     "lib/*"
   ],
