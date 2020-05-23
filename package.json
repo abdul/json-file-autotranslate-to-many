@@ -6,7 +6,6 @@
   "license": "MIT",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "test": "jest",
     "build": "tsc",
     "prepublishOnly": "tsc",
     "semantic-release": "semantic-release"
@@ -59,7 +58,6 @@
     "@types/ncp": "^2.0.3",
     "@types/node-fetch": "^2.1.6",
     "jest": "^24.3.1",
-    "ts-jest": "^24.0.0",
     "semantic-release": "^17.0.7"
   }
 }
